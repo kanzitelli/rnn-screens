@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "lib",
+    "declaration": true,
+    "skipLibCheck": true,
+    "module": "ES2020"
+  },
+  "exclude": ["node_modules", "lib"]
+}

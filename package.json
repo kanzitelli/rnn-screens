@@ -1,0 +1,49 @@
+{
+  "name": "rnn-layouts",
+  "version": "0.1.0",
+  "description": "🃏 Set of methods which help building initial layouts for RNN (react-native-navigation) without long boring code like {stack:component:{...}}. Also includes methods for screens registration and navigation between them.",
+  "author": "Batyr (dev@batyr.io)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf lib",
+    "build": "tsc && echo Build completed!",
+    "postbuild": "prettier --write ./lib",
+    "clean": "rm -rf ./node_modules ./package-lock.json && yarn",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format:check": "prettier --check ./src",
+    "format:write": "prettier --write ./src",
+    "release:github": "npm run build && dotenv release-it",
+    "release:npm:public": "npm run build && npm publish --access public",
+    "release:npm:private": "npm run build && npm publish",
+    "publish:npm": "npm run build && npm publish",
+    "publish:npm:next": "npm run build && npm publish --tag next"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-navigation",
+    "rnn-layouts"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-navigation": ">= 7.x.x"
+  },
+  "devDependencies": {
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@tsconfig/react-native": "^1.0.4",
+    "@types/react": "^17.0.33",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "^8.1.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react-native-navigation": "^7.23.1"
+  }
+}
