@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Navigation} from 'react-native-navigation';
 import {
   Options,
   Layout,
@@ -7,6 +6,9 @@ import {
   LayoutRoot,
   LayoutTabsChildren,
   LayoutComponent,
+  Constants,
+  Navigation,
+  NavigationConstants,
 } from 'react-native-navigation';
 
 // ==========
@@ -23,3 +25,33 @@ const StackMany = (children?: LayoutStackChildren[], options?: Options): Layout 
 const Stack = (c: LayoutStackChildren, options?: Options): Layout => StackMany([c], options);
 const Component = <P,>(component: LayoutComponent<P>): Layout => ({component});
 export {Root, BottomTabs, Stack, StackMany, Component};
+
+// ==============
+// | Navigation |
+// ==============
+
+class Nav {
+  private inited = false;
+  private N = Navigation;
+  C: NavigationConstants = Constants.getSync();
+
+  init = (): void => {
+    if (!this.inited) {
+      this.registerListeners();
+
+      this.inited = true;
+    }
+  };
+
+  private registerListeners = () => {
+    this.N.events().registerComponentWillAppearListener(() => {
+      this.getConstants();
+    });
+  };
+
+  private getConstants = async () => {
+    this.C = Constants.getSync();
+  };
+}
+
+export default new Nav();
