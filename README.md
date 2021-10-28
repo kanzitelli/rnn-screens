@@ -1,4 +1,6 @@
-<img src="https://xxx-files.ggc.team/oss/if-component/if-component-readme.png" width="100%" title="Logo">
+<p align="center">
+  <img src="https://xxx-files.ggc.team/oss/rnn-screens/logo.png" width="30%" title="Logo">
+</p>
 
 ### Install it
 
