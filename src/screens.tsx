@@ -1,4 +1,4 @@
-import {ComponentProvider} from 'react-native';
+import {ComponentProvider, StyleProp, ViewStyle} from 'react-native';
 import {
   Navigation,
   NavigationConstants,
@@ -16,30 +16,37 @@ import merge from 'lodash/merge';
 
 type PVoid = Promise<void>;
 
-export type ScreenInfoWithoutName = Omit<LayoutComponent, 'name'> & {
+type ScreenInfo = Omit<LayoutComponent, 'name'> & {
   component: NavigationFunctionComponent;
 };
-export type ScreenInfo<ScreenName extends string = string> = ScreenInfoWithoutName & {
+type ScreenInfoWithName<ScreenName extends string = string> = ScreenInfo & {
   name: ScreenName;
 };
 
-export type ScreenLayouts<ScreenName extends string = string> = {
-  [key in ScreenName]: ScreenInfo<ScreenName>;
+type ScreenLayoutsWithName<ScreenName extends string = string> = {
+  [key in ScreenName]: ScreenInfoWithName<ScreenName>;
 };
-export type ScreenLayoutsWithoutName<ScreenName extends string = string> = {
-  [key in ScreenName]: ScreenInfoWithoutName;
+export type ScreenLayouts<ScreenName extends string = string> = {
+  [key in ScreenName]: ScreenInfo;
 };
 
-export type Provider =
-  | ((C: NavigationFunctionComponent) => (props: NavigationComponentProps) => React.ReactElement)
+// not sure about this type 🤔
+type Provider =
+  | ((
+      Component: NavigationFunctionComponent,
+    ) => (props: NavigationComponentProps) => React.ReactElement)
+  | (<P = any>(
+      Component: React.ComponentType<P>,
+      containerStyles?: StyleProp<ViewStyle>,
+    ) => React.ComponentType<P>)
   | ComponentProvider;
 
 export class Screens<ScreenName extends string = string> {
   N = Navigation;
-  private Screens: ScreenLayouts<ScreenName>;
+  private Screens: ScreenLayoutsWithName<ScreenName>;
   private Constants: NavigationConstants = Constants.getSync();
 
-  constructor(screens: ScreenLayoutsWithoutName<ScreenName>, withProviders: Provider[] = []) {
+  constructor(screens: ScreenLayouts<ScreenName>, withProviders: Provider[] = []) {
     this.Screens = screens as any;
 
     // setting `name` for screens based on provided keys
@@ -89,12 +96,12 @@ export class Screens<ScreenName extends string = string> {
   }
 
   // Get methods
-  get() {
-    return this.Screens;
+  get(name: ScreenName) {
+    return this.Screens[name];
   }
 
-  getOne(name: ScreenName) {
-    return this.Screens[name];
+  getAll() {
+    return this.Screens;
   }
 
   getConstants() {
@@ -106,7 +113,7 @@ export class Screens<ScreenName extends string = string> {
   // Private methods
   private registerScreens(withProviders: Provider[] = []) {
     for (const [, info] of Object.entries(this.Screens)) {
-      const {name, component} = info as ScreenInfo;
+      const {name, component} = info as ScreenInfoWithName;
 
       this.N.registerComponent(
         name,
@@ -121,4 +128,11 @@ export class Screens<ScreenName extends string = string> {
       this.getConstants();
     });
   }
+}
+
+export function generateRNNScreens<ScreenName extends string = string>(
+  screens: ScreenLayouts<ScreenName>,
+  withProviders: Provider[] = [],
+) {
+  return new Screens<ScreenName>(screens, withProviders);
 }
