@@ -12,7 +12,6 @@ import {Stack} from '.';
 import {Component} from './layouts';
 import pipe from 'lodash/flowRight';
 import omit from 'lodash/omit';
-import merge from 'lodash/merge';
 
 type PVoid = Promise<void>;
 
@@ -72,7 +71,7 @@ export class Screens<ScreenName extends string = string> {
       Component({
         ...s,
         passProps,
-        options: merge(s.options, options),
+        options: {...s.options, ...options},
       }),
     );
   }
@@ -89,7 +88,7 @@ export class Screens<ScreenName extends string = string> {
         Component({
           ...s,
           passProps,
-          options: merge(s.options, options),
+          options: {...s.options, ...options},
         }),
       ),
     );
