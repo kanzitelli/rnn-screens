@@ -3,6 +3,7 @@
   "version": "0.0.9",
   "description": "🃏 Set of methods to help build initial screens for RNN (React Native Navigation) without hassle. Includes screens registration and predictable navigation between them.",
   "author": "Batyr (dev@batyr.io)",
+  "homepage": "https://github.com/kanzitelli/rnn-screens",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
