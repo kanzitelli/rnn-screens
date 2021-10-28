@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://xxx-files.ggc.team/oss/rnn-screens/rnn-screens-logo.png" width="70%" title="Logo">
+  <img src="https://xxx-files.ggc.team/oss/rnn-screens/rnn-screens-logo.png" width="80%" title="Logo">
 </p>
 
 ### Install it
