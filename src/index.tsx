@@ -33,12 +33,12 @@ const Component = <P,>(component: LayoutComponent<P>): Layout => ({component});
 // ==============
 
 type PVoid = Promise<void>;
-type ScreenInfo = {
+type ScreenInfo<ScreenName extends string = string> = Omit<LayoutComponent, 'name'> & {
+  name?: ScreenName;
   component: NavigationFunctionComponent;
-  options: Options;
 };
 type ScreenLayouts<ScreenName extends string = string> = {
-  [key in ScreenName]: ScreenInfo;
+  [key in ScreenName]: ScreenInfo<ScreenName>;
 };
 
 class Nav<ScreenName extends string = string> {
@@ -46,28 +46,11 @@ class Nav<ScreenName extends string = string> {
   private screens: ScreenLayouts<ScreenName>;
   C: NavigationConstants = Constants.getSync();
 
-  constructor(screens: ScreenLayouts<ScreenName>, withWrappers: ComponentProvider[] = []) {
+  constructor(screens: ScreenLayouts<ScreenName>, withProviders: ComponentProvider[] = []) {
     this.screens = screens;
 
-    this.registerScreens(screens, withWrappers);
+    this.registerScreens(withProviders);
     this.registerListeners();
-  }
-
-  private registerScreens(
-    screens: ScreenLayouts<ScreenName>,
-    withWrappers: ComponentProvider[] = [],
-  ) {
-    this.screens = screens;
-
-    for (const [key, value] of Object.entries(screens)) {
-      const {component} = value as ScreenInfo;
-
-      this.N.registerComponent(
-        key,
-        pipe(withWrappers, () => component),
-        () => component,
-      );
-    }
   }
 
   async push<T>(cId: string, name: ScreenName, passProps?: T, options?: Options): PVoid {
@@ -109,6 +92,22 @@ class Nav<ScreenName extends string = string> {
     );
   }
 
+  private registerScreens(withProviders: ComponentProvider[] = []) {
+    for (const [key, info] of Object.entries(this.screens)) {
+      const {component} = info as ScreenInfo;
+
+      // writing name as key
+      const sName = key as ScreenName;
+      this.screens[sName].name = sName;
+
+      this.N.registerComponent(
+        sName,
+        pipe(withProviders, () => component),
+        () => component,
+      );
+    }
+  }
+
   private registerListeners() {
     this.N.events().registerComponentWillAppearListener(() => {
       this.getConstants();
@@ -119,5 +118,14 @@ class Nav<ScreenName extends string = string> {
     this.C = Constants.getSync();
   }
 }
+
+const n = new Nav<'one' | 'two'>({
+  one: {
+    component: () => <></>,
+  },
+  two: {
+    component: () => <></>,
+  },
+});
 
 export {Nav, Root, BottomTabs, Stack, StackMany, Component};
