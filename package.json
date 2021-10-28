@@ -1,6 +1,6 @@
 {
   "name": "rnn-screens",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "🃏 Set of methods which help building initial screens for RNN (react-native-navigation) without long boring code like {stack:component:{...}}. Also includes methods for screens registration and navigation between them.",
   "author": "Batyr (dev@batyr.io)",
   "main": "lib/index.js",
@@ -26,7 +26,7 @@
     "react",
     "react-native",
     "react-native-navigation",
-    "rnn-layouts"
+    "rnn-screens"
   ],
   "peerDependencies": {
     "lodash": ">= 3.0.0",
