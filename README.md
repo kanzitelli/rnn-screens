@@ -4,7 +4,7 @@
 
 Purpose of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to simplify and accelerate the process of React Native App development with [React Native Navigation](https://github.com/wix/react-native-navigation). It is not a replacement for RNN but a good addition!
 
-### Quick start
+## Quick start
 
 Make sure you have [react-native-navigation](https://github.com/wix/react-native-navigation) installed in your project.
 
@@ -12,9 +12,9 @@ Make sure you have [react-native-navigation](https://github.com/wix/react-native
 yarn add rnn-screens
 ```
 
-### Usage
+## Usage
 
-#### 1. Describe app's screens
+### 1. Describe app's screens
 
 ```tsx
 import {generateRNNScreens, Root, Stack, Component, BottomTabs} from 'rnn-screens';
@@ -43,7 +43,7 @@ export const screens = generateRNNScreens<'Main' | 'Settings'>({
 });
 ```
 
-#### 2. Set app's navigation root
+### 2. Set app's navigation root
 
 ```tsx
 // One screen app
@@ -60,7 +60,7 @@ screens.N.setRoot(
 );
 ```
 
-#### 3. Navigate with predictability
+### 3. Navigate with predictability
 
 ```tsx
 // push screen
@@ -79,10 +79,10 @@ screens.push<ExampleScreenProps>(
 
 An integration example could be found at [kanzitelli/rnn-starter](https://github.com/kanzitelli/rnn-starter).
 
-### Credits
+## Credits
 
 Thanks to the team @ Wix behind [React Native Navigation](https://github.com/wix/react-native-navigation)!
 
-### License
+## License
 
 This project is [MIT licensed](https://github.com/kanzitelli/rnn-screens/blob/master/LICENSE.md)
