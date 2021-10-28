@@ -1,7 +1,7 @@
 {
-  "name": "rnn-layouts",
-  "version": "0.1.0",
-  "description": "🃏 Set of methods which help building initial layouts for RNN (react-native-navigation) without long boring code like {stack:component:{...}}. Also includes methods for screens registration and navigation between them.",
+  "name": "rnn-screens",
+  "version": "0.0.1",
+  "description": "🃏 Set of methods which help building initial screens for RNN (react-native-navigation) without long boring code like {stack:component:{...}}. Also includes methods for screens registration and navigation between them.",
   "author": "Batyr (dev@batyr.io)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
