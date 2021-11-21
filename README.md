@@ -19,7 +19,7 @@ yarn add rnn-screens
 ```tsx
 import {generateRNNScreens, Root, Stack, Component, BottomTabs} from 'rnn-screens';
 
-export const screens = generateRNNScreens<'Main' | 'Settings'>({
+export const screens = generateRNNScreens({
   Main: {
     component: Main,
     options: {
