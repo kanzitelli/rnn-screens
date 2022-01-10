@@ -7,6 +7,7 @@ import {
   NavigationFunctionComponent,
   NavigationComponentProps,
   LayoutComponent,
+  LayoutRoot,
 } from 'react-native-navigation';
 import {Stack} from '.';
 import {Component} from './layouts';
@@ -16,13 +17,15 @@ import merge from 'lodash/merge';
 
 type PVoid = Promise<void>;
 
-type ScreenInfo = Omit<LayoutComponent, 'name'> & {
 type RegisterRootComponentEvents = {
   beforeStart?: () => PVoid;
 };
 
+type ScreenInfo = {
   component: NavigationFunctionComponent;
+  options?: Options;
 };
+type ScreenInfo__MaybeFunc = ScreenInfo | (() => ScreenInfo);
 type ScreenInfoWithName<ScreenName extends string = string> = ScreenInfo & {
   name: ScreenName;
 };
@@ -31,7 +34,7 @@ type ScreenLayoutsWithName<ScreenName extends string = string> = {
   [key in ScreenName]: ScreenInfoWithName<ScreenName>;
 };
 export type ScreenLayouts<ScreenName extends string = string> = {
-  [key in ScreenName]: ScreenInfo;
+  [key in ScreenName]: ScreenInfo__MaybeFunc;
 };
 
 // not sure about this type 🤔
@@ -54,23 +57,14 @@ const DEFAULT_CONSTANTS: NavigationConstants = {
 
 export class Screens<ScreenName extends string = string> {
   N = Navigation;
-  private Screens: ScreenLayoutsWithName<ScreenName>;
   private Constants: NavigationConstants = DEFAULT_CONSTANTS;
+
+  private Screens: ScreenLayoutsWithName<ScreenName>;
   private Providers: Provider[] = [];
 
   constructor(screens: ScreenLayouts<ScreenName>, withProviders: Provider[] = []) {
-    this.Screens = screens as any;
+    this.Screens = screens as ScreenLayoutsWithName<ScreenName>; // a bit stupid logic as ScreenLayouts (from args) can contain function but it's taken care in registerScreens()
     this.Providers = withProviders;
-
-    // setting `name` for screens based on provided keys
-    Object.keys(screens).forEach(key => {
-      const snKey = key as ScreenName;
-
-      this.Screens[snKey] = {
-        ...screens[snKey],
-        name: snKey,
-      };
-    });
 
     this.registerScreens();
     this.registerListeners();
@@ -128,7 +122,22 @@ export class Screens<ScreenName extends string = string> {
   }
 
   // Private methods
-  private registerScreens() {
+  private async registerScreens() {
+    // setting `name` for screens based on provided keys
+    Object.keys(this.Screens).forEach(key => {
+      const name = key as ScreenName;
+
+      // screen info can be function (in case we need to rely on translate service)
+      const s = this.Screens[name] as ScreenInfo__MaybeFunc;
+      const sWithName = typeof s === 'function' ? s() : s;
+
+      this.Screens[name] = {
+        ...sWithName,
+        name,
+      };
+    });
+
+    // registering screen components
     for (const [, info] of Object.entries(this.Screens)) {
       const {name, component} = info as ScreenInfoWithName;
 
