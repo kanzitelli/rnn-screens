@@ -109,7 +109,11 @@ export class Screens<ScreenName extends string = string> {
   }
 
   // Get methods
-  get(name: ScreenName) {
+  get(name: ScreenName): LayoutComponent {
+    if (!this.Screens[name]) {
+      console.warn('[rnn-screens] Screen "name" was not registered');
+    }
+
     return this.Screens[name];
   }
 
