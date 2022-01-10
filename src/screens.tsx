@@ -21,8 +21,10 @@ type RegisterRootComponentEvents = {
   beforeStart?: () => PVoid;
 };
 
+export type ScreenComponent = NavigationFunctionComponent;
+
 type ScreenInfo = {
-  component: NavigationFunctionComponent;
+  component: ScreenComponent;
   options?: Options;
 };
 type ScreenInfo__MaybeFunc = ScreenInfo | (() => ScreenInfo);
@@ -39,9 +41,7 @@ export type ScreenLayouts<ScreenName extends string = string> = {
 
 // not sure about this type 🤔
 type Provider =
-  | ((
-      Component: NavigationFunctionComponent,
-    ) => (props: NavigationComponentProps) => React.ReactElement)
+  | ((Component: ScreenComponent) => (props: NavigationComponentProps) => React.ReactElement)
   | (<P = any>(
       Component: React.ComponentType<P>,
       containerStyles?: StyleProp<ViewStyle>,
