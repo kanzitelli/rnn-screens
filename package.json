@@ -1,6 +1,6 @@
 {
   "name": "rnn-screens",
-  "version": "0.1.0",
+  "version": "0.2.0-rc.4",
   "description": "🃏 Set of methods to help build initial screens for RNN (React Native Navigation) without hassle. Includes screens registration and predictable navigation between them.",
   "author": "Batyr (dev@batyr.io)",
   "homepage": "https://github.com/kanzitelli/rnn-screens",
@@ -17,10 +17,10 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format:check": "prettier --check ./src",
     "format:write": "prettier --write ./src",
+    "release": "npm run release:github && npm publish --access public",
     "release:github": "npm run build && dotenv release-it",
     "release:npm:public": "npm run build && npm publish --access public",
     "release:npm:private": "npm run build && npm publish",
-    "publish:npm": "npm run build && npm publish",
     "publish:npm:next": "npm run build && npm publish --tag next"
   },
   "keywords": [
