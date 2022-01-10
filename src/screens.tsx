@@ -40,13 +40,22 @@ type Provider =
     ) => React.ComponentType<P>)
   | ComponentProvider;
 
+const DEFAULT_CONSTANTS: NavigationConstants = {
+  statusBarHeight: 0,
+  backButtonId: 'back',
+  topBarHeight: 0,
+  bottomTabsHeight: 0,
+};
+
 export class Screens<ScreenName extends string = string> {
   N = Navigation;
   private Screens: ScreenLayoutsWithName<ScreenName>;
-  private Constants: NavigationConstants = Constants.getSync();
+  private Constants: NavigationConstants = DEFAULT_CONSTANTS;
+  private Providers: Provider[] = [];
 
   constructor(screens: ScreenLayouts<ScreenName>, withProviders: Provider[] = []) {
     this.Screens = screens as any;
+    this.Providers = withProviders;
 
     // setting `name` for screens based on provided keys
     Object.keys(screens).forEach(key => {
@@ -58,7 +67,7 @@ export class Screens<ScreenName extends string = string> {
       };
     });
 
-    this.registerScreens(withProviders);
+    this.registerScreens();
     this.registerListeners();
   }
 
@@ -110,13 +119,13 @@ export class Screens<ScreenName extends string = string> {
   }
 
   // Private methods
-  private registerScreens(withProviders: Provider[] = []) {
+  private registerScreens() {
     for (const [, info] of Object.entries(this.Screens)) {
       const {name, component} = info as ScreenInfoWithName;
 
       this.N.registerComponent(
         name,
-        pipe(withProviders, () => component),
+        pipe(this.Providers, () => component),
         () => component,
       );
     }
