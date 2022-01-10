@@ -14,5 +14,9 @@ export const BottomTabs = (children?: LayoutTabsChildren[], options?: Options): 
 export const StackMany = (children?: LayoutStackChildren[], options?: Options): Layout => ({
   stack: {children, options},
 });
-export const Stack = (c: LayoutStackChildren, options?: Options): Layout => StackMany([c], options);
+export const Stack = (component: LayoutStackChildren, options?: Options): Layout =>
+  StackMany([component], options);
 export const Component = <P,>(component: LayoutComponent<P>): Layout => ({component});
+export const Screen = <P,>(component: LayoutComponent<P>): Layout => Stack(Component(component));
+export const RootScreen = <P,>(component: LayoutComponent<P>): LayoutRoot =>
+  Root(Stack(Component(component)));
