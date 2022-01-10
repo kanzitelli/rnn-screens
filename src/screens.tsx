@@ -16,6 +16,10 @@ import omit from 'lodash/omit';
 type PVoid = Promise<void>;
 
 type ScreenInfo = Omit<LayoutComponent, 'name'> & {
+type RegisterRootComponentEvents = {
+  beforeStart?: () => PVoid;
+};
+
   component: NavigationFunctionComponent;
 };
 type ScreenInfoWithName<ScreenName extends string = string> = ScreenInfo & {
@@ -143,4 +147,16 @@ export function generateRNNScreens<ScreenName extends string = string>(
   withProviders: Provider[] = [],
 ) {
   return new Screens<ScreenName>(screens, withProviders);
+}
+
+// Similar to "register component" functions from react-native and Expo
+export function registerRootComponent(
+  root: () => LayoutRoot,
+  events: RegisterRootComponentEvents = {},
+) {
+  Navigation.events().registerAppLaunchedListener(async () => {
+    if (events.beforeStart) await events.beforeStart();
+
+    await Navigation.setRoot(root());
+  });
 }
