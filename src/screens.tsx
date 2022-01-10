@@ -21,10 +21,10 @@ type RegisterRootComponentEvents = {
   beforeStart?: () => PVoid;
 };
 
-export type ScreenComponent = NavigationFunctionComponent;
+export type ScreenComponent<Props = any> = NavigationFunctionComponent<Props>;
 
 type ScreenInfo = {
-  component: ScreenComponent;
+  component: ScreenComponent<any>; // <any> is not 100% correct, can be done better
   options?: Options;
 };
 type ScreenInfo__MaybeFunc = ScreenInfo | (() => ScreenInfo);
