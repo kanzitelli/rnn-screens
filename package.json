@@ -1,7 +1,7 @@
 {
   "name": "rnn-screens",
-  "version": "0.2.0-rc.13",
-  "description": "🃏 Set of methods to help build initial screens for RNN (React Native Navigation) without hassle. Includes screens registration and predictable navigation between them.",
+  "version": "0.2.0-rc.22",
+  "description": "🃏 Simplifed and predictable Navigation for React Native.",
   "author": "Batyr (dev@batyr.io) (https://github.com/kanzitelli)",
   "homepage": "https://github.com/kanzitelli/rnn-screens",
   "main": "lib/index.js",
@@ -47,10 +47,8 @@
     "lodash": "^4.17.21",
     "prettier": "^2.4.1",
     "react-native": "^0.66.1",
+    "react-native-navigation": "^7.25.0",
     "typescript": "^4.4.4"
   },
-  "license": "MIT",
-  "dependencies": {
-    "react-native-navigation": "^7.23.1"
-  }
+  "license": "MIT"
 }
