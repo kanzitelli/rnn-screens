@@ -40,7 +40,7 @@ registerRootComponent(App);
 #### 2. Build components (ex., in `App.tsx`)
 
 ```tsx
-import {generateRNNScreens, Root, Screen, ScreenComponent} from 'rnn-screens';
+import {generateRNNScreens, Root, BottomTabs, Screen, ScreenComponent} from 'rnn-screens';
 
 const Main: ScreenComponent = ({componentId}) => {
   return <>...</>;
@@ -57,8 +57,6 @@ const Settings: ScreenComponent<SettingsProps> = ({componentId, type}) => {
 #### 3. Describe screens
 
 ```tsx
-import {generateRNNScreens, Root, Stack, Component, BottomTabs} from 'rnn-screens';
-
 const screens = generateRNNScreens({
   Main: {
     component: Main,
@@ -78,7 +76,17 @@ const screens = generateRNNScreens({
 #### 4. Build root component
 
 ```tsx
+// single screen app
 const App = () => Root(Screen(screens.get('Main')));
+
+// tab based app
+const TabsApp = () =>
+  Root(
+    BottomTabs([
+      Screen(screens.get('Main')),
+      Screen(screens.get('Settings')),
+    ]),
+  );
 ```
 
 #### 5. Navigate with predictability
