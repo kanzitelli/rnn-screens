@@ -5497,7 +5497,7 @@ react-native-codegen@^0.0.7:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-navigation@^7.23.1, react-native-navigation@^7.25.0:
+react-native-navigation@^7.25.0:
   version "7.25.0"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-7.25.0.tgz#ce7ae6ad01009c7cfcbf753fd2e66a4e18d9c83b"
   integrity sha512-JmoM58MGU/2JXR0216Ps2ZAAcFo4CHiddK9/6KYysUC7VUkWNjKcq2FOYgW4tpcQ3h/ckfQ54VlNN5nIFzu7Fw==
@@ -5810,12 +5810,10 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
-rnn-screens@^0.2.0-rc.20:
-  version "0.2.0-rc.20"
-  resolved "https://registry.yarnpkg.com/rnn-screens/-/rnn-screens-0.2.0-rc.20.tgz#74ae9a0b66c9b3423799c70ff8f655ce86636a6c"
-  integrity sha512-Wh9zHMOeMZHMImgK/02djX0yxUY8M9WqvRgkVw6kPOIkxkrsb+Z9rLVM9mcPpwqzL72R/8QUHS1GZsoC9uuA6g==
-  dependencies:
-    react-native-navigation "^7.23.1"
+rnn-screens@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/rnn-screens/-/rnn-screens-0.2.0.tgz#bbe184184d60cc713079dc94df324620a2047ab6"
+  integrity sha512-//NEW5Tsu+4CIvVD04b9YzQM1Po1bQJTyd5WB+Abm7jl0873kaCfhTthv2DBNF5srcI5WoAfrUGLKU5Zt92qmg==
 
 rsvp@^4.8.4:
   version "4.8.5"
