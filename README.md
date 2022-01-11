@@ -6,7 +6,7 @@
 
 ## Goal
 
-The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provide React Native developers with more simplified and predictable way of Navigation. It's build on top of [React Native Navigation](https://github.com/wix/react-native-navigation).
+The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provide React Native developers with more simplified and predictable Navigation. It's built on top of [React Native Navigation](https://github.com/wix/react-native-navigation).
 
 ## Quick start
 
@@ -46,9 +46,7 @@ const Main: ScreenComponent = ({componentId}) => {
   return <>...</>;
 };
 
-type SettingsProps = {
-  type: 'push' | 'show';
-};
+type SettingsProps = {type: 'push' | 'show'};
 const Settings: ScreenComponent<SettingsProps> = ({componentId, type}) => {
   return <>...</>;
 };
