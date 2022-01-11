@@ -2,7 +2,7 @@
   <img src="https://xxx-files.ggc.team/oss/rnn-screens/cover.png" width="80%" title="Logo">
 </p>
 
-☣️ `Experiment` <i>This library is an experiment and may have breaking changes in the future.</i>
+☣️ `Experiment` <i>This is an experimental library and may have breaking changes in the future.</i>
 
 ## Goal
 
