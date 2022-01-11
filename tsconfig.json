@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "module": "ES2020"
   },
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules", "lib", "example", "_media"]
 }
