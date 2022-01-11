@@ -6,11 +6,9 @@
 
 The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provide React Native developers with more simplified and predictable way of Navigation. It's build on top of [React Native Navigation](https://github.com/wix/react-native-navigation).
 
-☣️ `Experiment`. This library is an experiment and may have breaking changes in the future.
+☣️ `Experiment` <i>This library is an experiment and may have breaking changes in the future.</i>
 
 ## Quick start
-
-Make sure you have [react-native-navigation](https://github.com/wix/react-native-navigation) installed in your project.
 
 #### 1. Install RNN Screens
 
@@ -23,11 +21,6 @@ Make sure you have [react-native-navigation](https://github.com/wix/react-native
 ```
 > yarn add react-native-navigation
 > npx rnn-link
-```
-
-#### 3. Install pods
-
-```
 > npx pod-install
 ```
 
@@ -82,7 +75,7 @@ const screens = generateRNNScreens({
 });
 ```
 
-#### 4. Build `App` component
+#### 4. Build root component
 
 ```tsx
 const App = () => Root(Screen(screens.get('Main')));
