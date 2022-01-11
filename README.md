@@ -2,11 +2,11 @@
   <img src="https://xxx-files.ggc.team/oss/rnn-screens/cover.png" width="80%" title="Logo">
 </p>
 
+☣️ `Experiment` <i>This library is an experiment and may have breaking changes in the future.</i>
+
 ## Goal
 
 The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provide React Native developers with more simplified and predictable way of Navigation. It's build on top of [React Native Navigation](https://github.com/wix/react-native-navigation).
-
-☣️ `Experiment` <i>This library is an experiment and may have breaking changes in the future.</i>
 
 ## Quick start
 
