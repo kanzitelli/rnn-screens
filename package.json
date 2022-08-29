@@ -1,7 +1,7 @@
 {
   "name": "rnn-screens",
   "version": "0.2.0",
-  "description": "🃏 Simplifed and predictable Navigation for React Native.",
+  "description": "Predictable Navigation for React Native.",
   "author": "Batyr (dev@batyr.io) (https://github.com/kanzitelli)",
   "homepage": "https://github.com/kanzitelli/rnn-screens",
   "main": "lib/index.js",
