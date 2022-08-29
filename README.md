@@ -10,44 +10,37 @@ The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provi
 
 ## Quick start
 
-#### 1. Install RNN Screens
+### Starters
+
+1. [rnn-starter](https://github.com/kanzitelli/rnn-starter) - more advanced starter that is powered by cli-rn, React Native Navigation, Expo Modules, **RNN Screens**, RN UI lib, MMKV, Mobx, Reanimated 2, Dark Mode, Localization, Notifications, Permissions, and much more.
+
+2. [starters-dev/rnn-with-expo](https://github.com/starters-dev/rnn-with-expo) - minimalistic starter with React Native Navigation, Expo Modules and **RNN Screens**.
+
+### Bare RNN
+
+#### 1. Install [React Native Navigation](https://github.com/wix/react-native-navigation) and RNN Screens
 
 ```
-> yarn add rnn-screens
-```
-
-#### 2. Install and link [React Native Navigation](https://github.com/wix/react-native-navigation)
-
-```
-> yarn add react-native-navigation
+> yarn add react-native-navigation rnn-screens
 > npx rnn-link
 > npx pod-install
 ```
 
 If you had problems installing RNN, please follow more [detailed tutorial](https://wix.github.io/react-native-navigation/docs/installing)
 
-## Usage
-
-#### 1. Update `index.js`
-
-```tsx
-import {registerRootComponent} from 'rnn-screens';
-import App from './App';
-
-registerRootComponent(App);
-```
-
-#### 2. Build components (ex., in `App.tsx`)
+#### 2. Build screen components
 
 ```tsx
 import {generateRNNScreens, Root, BottomTabs, Screen, ScreenComponent} from 'rnn-screens';
 
-const Main: ScreenComponent = ({componentId}) => {
+// src/screens/main.tsx
+export const Main: ScreenComponent = ({componentId}) => {
   return <>...</>;
 };
 
+// src/screens/settings.tsx
 type SettingsProps = {type: 'push' | 'show'};
-const Settings: ScreenComponent<SettingsProps> = ({componentId, type}) => {
+export const Settings: ScreenComponent<SettingsProps> = ({componentId, type}) => {
   return <>...</>;
 };
 ```
@@ -55,7 +48,13 @@ const Settings: ScreenComponent<SettingsProps> = ({componentId, type}) => {
 #### 3. Describe screens
 
 ```tsx
-const screens = generateRNNScreens({
+// src/screens/index.tsx
+
+import {generateRNNScreens} from 'rnn-screens';
+import {Main} from './main';
+import {Settings} from './settings';
+
+export const screens = generateRNNScreens({
   Main: {
     component: Main,
     options: {
@@ -74,22 +73,37 @@ const screens = generateRNNScreens({
 #### 4. Build root component
 
 ```tsx
+// App.tsx
+
 // single screen app
-const App = () => Root(Screen(screens.get('Main')));
+export const App = () => Root(Screen(screens.get('Main')));
 
 // tab based app
-const TabsApp = () =>
+export const TabsApp = () =>
   Root(
     BottomTabs([
       Screen(screens.get('Main')),
-      Screen(screens.get('Settings')),
-    ]),
+      Screen(screens.get('Settings'))
+    ])
   );
 ```
 
-#### 5. Navigate with predictability
+#### 5. Update `index.js`
 
 ```tsx
+// index.js
+
+import {registerRootComponent} from 'rnn-screens';
+import {App} from './App';
+
+registerRootComponent(App);
+```
+
+#### 6. Navigate with predictability
+
+```tsx
+// navigate from any screen
+
 // push screen
 screens.push(componentId, 'Settings');
 
@@ -103,20 +117,13 @@ screens.push<SettingsProps>(componentId, 'Settings', {type: 'push'});
 screens.N.dismissAllModals();
 ```
 
-A simple example of RNN Screens integration is located under `example/` folder.
-
-If you'd like to see more advanced example with translation service and other stuff, check out [kanzitelli/rnn-starter](https://github.com/kanzitelli/rnn-starter).
-
 ## Enhancements
-
-- [ ] Better documentation
-- [ ] Build an OSS React Native app with RNN Screens.
 
 Feel free to open an issue for suggestions.
 
 ## Credits
 
-Thanks to the team @ Wix behind [React Native Navigation](https://github.com/wix/react-native-navigation)!
+Thanks to the [React Native Navigation](https://github.com/wix/react-native-navigation) team @ Wix!
 
 ## License
 
