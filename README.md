@@ -12,9 +12,9 @@ The goal of [RNN Screens](https://github.com/kanzitelli/rnn-screens) is to provi
 
 ### Starters
 
-1. [rnn-starter](https://github.com/kanzitelli/rnn-starter) - more advanced starter that is powered by cli-rn, React Native Navigation, Expo Modules, **RNN Screens**, RN UI lib, MMKV, Mobx, Reanimated 2, Dark Mode, Localization, Notifications, Permissions, and much more.
+1. [starters-dev/rnn-with-expo](https://github.com/starters-dev/rnn-with-expo) - minimalistic starter with React Native Navigation, Expo Modules and **RNN Screens**.
 
-2. [starters-dev/rnn-with-expo](https://github.com/starters-dev/rnn-with-expo) - minimalistic starter with React Native Navigation, Expo Modules and **RNN Screens**.
+2. [rnn-starter](https://github.com/kanzitelli/rnn-starter) - more advanced starter that is powered by cli-rn, React Native Navigation, Expo Modules, **RNN Screens**, RN UI lib, MMKV, Mobx, Reanimated 2, Dark Mode, Localization, Notifications, Permissions, and much more.
 
 ### Bare RNN
 
