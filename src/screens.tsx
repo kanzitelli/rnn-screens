@@ -24,7 +24,7 @@ type RegisterRootComponentEvents = {
 export type ScreenComponent<Props = any> = NavigationFunctionComponent<Props>;
 
 type ScreenInfo = {
-  component: ScreenComponent<any>; // <any> is not 100% correct, can be done better
+  component: ScreenComponent;
   options?: Options;
 };
 type ScreenInfo__MaybeFunc = ScreenInfo | (() => ScreenInfo);
@@ -105,7 +105,7 @@ export class Screens<ScreenName extends string = string> {
   // Get methods
   get(name: ScreenName): LayoutComponent {
     if (!this.Screens[name]) {
-      console.warn('[rnn-screens] Screen "name" was not registered');
+      console.warn(`[rnn-screens] Screen "${name}" was not registered`);
     }
 
     return this.Screens[name];
@@ -119,6 +119,16 @@ export class Screens<ScreenName extends string = string> {
     this.Constants = Constants.getSync();
 
     return this.Constants;
+  }
+
+  // Methods
+  mergeOptions(name: ScreenName, opts: Options) {
+    if (!this.Screens[name]) {
+      console.warn(`[rnn-screens] Screen "${name}" was not registered`);
+      return;
+    }
+
+    this.Screens[name].options = merge(this.Screens[name].options, opts);
   }
 
   // Private methods
