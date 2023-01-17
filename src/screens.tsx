@@ -2,7 +2,6 @@ import {ComponentProvider, StyleProp, ViewStyle} from 'react-native';
 import {
   Navigation,
   NavigationConstants,
-  Constants,
   Options,
   NavigationFunctionComponent,
   NavigationComponentProps,
@@ -71,7 +70,7 @@ export class Screens<ScreenName extends string = string> {
   }
 
   // Navigation methods
-  async push<T>(cId: string, name: ScreenName, passProps?: T, options?: Options): PVoid {
+  async push<T extends {}>(cId: string, name: ScreenName, passProps?: T, options?: Options): PVoid {
     const s = omit(this.Screens[name], 'component');
 
     await this.N.push(
@@ -88,7 +87,7 @@ export class Screens<ScreenName extends string = string> {
     await this.N.pop(cId);
   }
 
-  async show<T>(name: ScreenName, passProps?: T, options?: Options): PVoid {
+  async show<T extends {}>(name: ScreenName, passProps?: T, options?: Options): PVoid {
     const s = omit(this.Screens[name], 'component');
 
     this.N.showModal(
@@ -116,7 +115,7 @@ export class Screens<ScreenName extends string = string> {
   }
 
   getConstants() {
-    this.Constants = Constants.getSync();
+    this.Constants = this.N.constantsSync();
 
     return this.Constants;
   }
